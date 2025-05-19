@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: default
+    tables:
+      - name: raw_privategameforgameformat_jqdkca4vcbf6nh7ojsquhjo4ai_staging
+      - name: raw_privatesituationforgameformat_jqdkca4vcbf6nh7ojsquhjo4ai_staging
+      - name: raw_privatesequenceforgameformat_jqdkca4vcbf6nh7ojsquhjo4ai_staging
+      - name: raw_user_jqdkca4vcbf6nh7ojsquhjo4ai_staging
