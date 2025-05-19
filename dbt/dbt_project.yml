@@ -1,8 +1,8 @@
-name: 'dbt_training'
+name: 'pitch_analysis'
 config-version: 2
 version: '1.0.0'
 
-profile: 'dbt_training_dw'
+profile: 'pitch_analysis_dw'
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]
@@ -15,5 +15,12 @@ target-path: "target"
 clean-targets: [target, dbt_packages]
 
 models:
-  dbt_training:
+  pitch_analysis:
     example:
+seeds:
+  pitch_analysis:
+    +tags: ["staging"]
+    +meta:
+      layer: staging
+    +tblproperties:
+      layer: staging
