@@ -1,0 +1,10 @@
+runner_key,runner_code,description,is_missing,created_at,created_by,updated_at,updated_by
+1,0,なし,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+2,1,一塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+3,2,二塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+4,3,三塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+5,4,一、二塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+6,5,一、三塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+7,6,二、三塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+8,7,満塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
+0,8,NODATA,YES,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
