@@ -1,5 +1,6 @@
 {{ config(
-    materialized='incremental'
+    materialized='incremental',
+    unique_key='game_day_key'
 ) }}
 
 WITH base AS (
@@ -17,11 +18,7 @@ WITH base AS (
   FROM {{ ref('pitching_event') }}
   WHERE GROUP BY date
 )
-
 SELECT * FROM base 
-
 {% if is_incremental() %}
-WHERE game_day_key NOT IN (
-  SELECT game_day_key FROM {{ this }}
-)
+WHERE game_day_key NOT IN (SELECT game_day_key FROM {{ this }})
 {% endif %}

@@ -1,6 +1,7 @@
 {{
     config(
-        materialized='incremental'
+        materialized='incremental',
+        unique_key='batter_key'
     )
 }}
 
@@ -38,7 +39,5 @@ grouped AS (
 )
 SELECT * FROM grouped
 {% if is_incremental() %}
-
-	where "batter_key" not in (select "batter_key" from {{ this }})
-    
+	where batter_key not in (select batter_key from {{ this }})
 {% endif %}

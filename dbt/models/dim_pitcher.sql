@@ -1,6 +1,7 @@
 {{
     config(
-        materialized='incremental'
+        materialized='incremental',
+        unique_key='pitcher_key'
     )
 }}
 
@@ -23,7 +24,6 @@ grouped AS (
   SELECT
     -- サロゲートキー
     md5(concat_ws('||', owner, pitcher, throw, team_for_key)) AS pitcher_key,
-
     owner,
     pitcher AS pitcher_name,
     throw,
@@ -38,7 +38,5 @@ grouped AS (
 )
 SELECT * FROM grouped
 {% if is_incremental() %}
-
-	where "pitcher_key" not in (select "pitcher_key" from {{ this }})
-
+	where pitcher_key not in (select pitcher_key from {{ this }})
 {% endif %}
