@@ -33,7 +33,7 @@ WITH base AS (
     ON pe.owner = do.owner_id
     LEFT JOIN {{ ref('dim_pitching_types') }} dpt ON pe.breaking_ball = dpt.english_name
     LEFT JOIN {{ ref('dim_game_day') }} dgd ON pe.date = dgd.date
-    LEFT JOIN {{ ref('dim_inning') }} di ON pe.inning = di.inning AND pe.top_or_bottom = di.top_bottom
+    LEFT JOIN {{ ref('dim_inning') }} di ON pe.inning = di.inning AND pe.top_or_bottom = di.top_bottom_english
     LEFT JOIN {{ ref('dim_pitching_counts') }} dpc ON pe.strikes = dpc.strikes AND pe.balls = dpc.balls
     LEFT JOIN {{ ref('dim_out_counts') }} doc ON pe.out_counts = doc.out_counts
     LEFT JOIN {{ ref('dim_runners') }} dr ON pe.runner = dr.runner_code
