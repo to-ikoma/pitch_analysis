@@ -7,14 +7,14 @@
 WITH base AS (
   SELECT
     owner,
-    pitcher,
-    throw,
+    batter,
+    bat,
     top_or_bottom,
     second_attack_team,
     first_attack_team,
     CASE
-      WHEN top_or_bottom = 'top' THEN second_attack_team
-      WHEN top_or_bottom = 'bottom' THEN first_attack_team
+      WHEN top_or_bottom = 'top' THEN first_attack_team
+      WHEN top_or_bottom = 'bottom' THEN second_attack_team
       ELSE ''
     END AS team_for_key
   FROM {{ ref('pitching_event') }}
@@ -22,11 +22,11 @@ WITH base AS (
 
 SELECT
   -- サロゲートキー
-  md5(concat_ws('||', owner, pitcher, throw, team_for_key)) AS pitcher_key,
+  md5(concat_ws('||', owner, batter, bat, team_for_key)) AS batter_key,
 
   owner,
-  pitcher AS pitcher_name,
-  throw,
+  batter AS batter_name,
+  bat,
   team_for_key AS team,
   'NO' AS is_missing,
   current_timestamp() AS created_at,
@@ -35,10 +35,10 @@ SELECT
   'dbt/model' AS updated_by
 
 FROM base
-GROUP BY owner, pitcher, throw, team_for_key
+GROUP BY owner, batter, bat, team_for_key
 
 {% if is_incremental() %}
 
-	where "pitcher_key" not in (select "pitcher_key" from {{ this }})
+	where "batter_key" not in (select "batter_key" from {{ this }})
 
 {% endif %}

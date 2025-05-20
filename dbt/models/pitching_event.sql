@@ -18,6 +18,7 @@ SELECT
   sequences.pitchResult AS pitch_result,
   sequences.sequence AS sequence,
   situations.batter AS batter,
+  situations.bat AS bat,
   sequences.speed AS speed,
   sequences.pitchXPosition AS pitch_x_position,
   sequences.pitchYPosition AS pitch_y_position,
