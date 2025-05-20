@@ -5,8 +5,8 @@ SELECT
   games.firstAttackTeam AS first_attack_team,
   games.secondAttackTeam AS second_attack_team,
   CASE
-      WHEN top_or_bottom = 'top' THEN second_attack_team
-      WHEN top_or_bottom = 'bottom' THEN first_attack_team
+      WHEN situations.topOrBottom = 'top' THEN games.secondAttackTeam
+      WHEN situations.topOrBottom = 'bottom' THEN games.firstAttackTeam
       ELSE ''
   END AS team_for_pitcher,
   games.date AS date,
@@ -25,8 +25,8 @@ SELECT
   situations.batter AS batter,
   situations.bat AS bat,
   CASE
-      WHEN top_or_bottom = 'bottom' THEN second_attack_team
-      WHEN top_or_bottom = 'top' THEN first_attack_team
+      WHEN situations.topOrBottom = 'bottom' THEN games.secondAttackTeam
+      WHEN situations.topOrBottom = 'top' THEN games.firstAttackTeam
       ELSE ''
   END AS team_for_batter,
   sequences.speed AS speed,
