@@ -35,7 +35,7 @@ LEFT JOIN {{ ref('dim_inning') }} di ON pe.inning = di.inning AND pe.top_or_bott
 LEFT JOIN {{ ref('dim_pitching_counts') }} dpc ON pe.strikes = dpc.strikes AND pe.balls = dpc.balls
 LEFT JOIN {{ ref('dim_out_counts') }} doc ON pe.out_counts = doc.out_counts
 LEFT JOIN {{ ref('dim_runners') }} dr ON pe.runner = dr.runner_code
-LEFT JOIN {{ ref('dim_pitching_results') }} dpr ON pe.pitch_result = dpr.pitching_result_id
+LEFT JOIN {{ ref('dim_pitching_results') }} dpr ON pe.pitch_result = dpr.english_name
 LEFT JOIN {{ ref('dim_pitching_numbers') }} dpn ON pe.sequence = dpn.pitching_number
 
 {% if is_incremental() %}
