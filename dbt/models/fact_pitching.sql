@@ -27,7 +27,7 @@ LEFT JOIN {{ ref('dim_pitcher') }} dp
   ON pe.owner = dp.owner AND pe.pitcher = dp.pitcher_name AND (pe.throw = dp.throw OR (pe.throw IS NULL AND dp.throw IS NULL)) AND pe.team_for_pitcher = dp.team
 LEFT JOIN {{ ref('dim_batter') }} db
   ON pe.owner = db.owner AND pe.batter = db.batter_name AND pe.bat = db.bat AND pe.team_for_batter = db.team
-LEFT JOIN {{ ref('dim_owner') }} do
+LEFT JOIN (SELECT * FROM {{ ref('dim_owner') }} WHERE dbt_valid_to IS NULL) do
   ON pe.owner = do.owner_id
 LEFT JOIN {{ ref('dim_pitching_types') }} dpt ON pe.breaking_ball = dpt.english_name
 LEFT JOIN {{ ref('dim_game_day') }} dgd ON pe.date = dgd.date
