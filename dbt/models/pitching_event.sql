@@ -4,6 +4,11 @@ SELECT
   situations.throw AS throw,
   games.firstAttackTeam AS first_attack_team,
   games.secondAttackTeam AS second_attack_team,
+  CASE
+      WHEN top_or_bottom = 'top' THEN second_attack_team
+      WHEN top_or_bottom = 'bottom' THEN first_attack_team
+      ELSE ''
+  END AS team_for_pitcher,
   games.date AS date,
   sequences.breakingBall AS breaking_ball,
   situations.title AS title,
@@ -19,6 +24,11 @@ SELECT
   sequences.sequence AS sequence,
   situations.batter AS batter,
   situations.bat AS bat,
+  CASE
+      WHEN top_or_bottom = 'bottom' THEN second_attack_team
+      WHEN top_or_bottom = 'top' THEN first_attack_team
+      ELSE ''
+  END AS team_for_batter,
   sequences.speed AS speed,
   sequences.pitchXPosition AS pitch_x_position,
   sequences.pitchYPosition AS pitch_y_position,
