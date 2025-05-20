@@ -25,10 +25,6 @@ def main():
     if "_corrupt_record" in df.columns and len(df.columns) == 1:
         raise ValueError(f"{table_name} の読み込みに失敗しました。壊れたJSONの可能性があります: {s3_path}")
 
-    # `_corrupt_record`しかないデータでの保存を防ぐ
-    if "_corrupt_record" in df.columns and len(df.columns) == 1:
-        raise ValueError(f"{table_name} の読み込みに失敗しました。壊れたJSONの可能性があります: {s3_path}")
-
     # 利用せず、セキュリティ的に不要なデータ
     # また、運用を容易にするため、利用しないはネストの深いStruct型カラムは除外（もしかしたらApache Icebergなら柔軟なスキーマハンドリングが可能かも）
     exclude_columns = ["firstAttackMember", "secondAttackMember", "detailsForNextBatter","pitchInfo","pk"]
@@ -58,16 +54,30 @@ def main():
         # ユーザ系テーブルは上書き
         exclued_df.write.mode("overwrite").format("delta").saveAsTable(f"`{table_name_with_prefix}`")
         print(f"`{table_name_with_prefix}` を更新しました。")
-    else:
-        exclued_df.createOrReplaceTempView("incoming")
-        spark.sql(f"""
-            MERGE INTO `{table_name_with_prefix}` t
-            USING incoming s
-            ON t.id = s.id
-            WHEN MATCHED THEN UPDATE SET *
-            WHEN NOT MATCHED THEN INSERT *
-        """)
-        print(f"`{table_name_with_prefix}` を更新しました。")
+        return
+
+    # 既存カラムとの差分補完
+    target_columns = spark.table(table_name_with_prefix).columns
+    for col_name in target_columns:
+        if col_name not in exclued_df.columns:
+            exclued_df = exclued_df.withColumn(col_name, lit(None))
+
+    exclued_df = exclued_df.select(*target_columns)
+    exclued_df.createOrReplaceTempView("incoming")
+
+    assignments = ",\n            ".join([f"t.{c} = s.{c}" for c in target_columns if c != "id"])
+    columns_str = ", ".join(target_columns)
+
+    merge_sql = f"""
+        MERGE INTO `{table_name_with_prefix}` t
+        USING incoming s
+        ON t.id = s.id
+        WHEN MATCHED THEN UPDATE SET
+            {assignments}
+        WHEN NOT MATCHED THEN INSERT ({columns_str}) VALUES ({columns_str})
+    """
+
+    spark.sql(merge_sql)
 
 if __name__ == "__main__":
     main()
