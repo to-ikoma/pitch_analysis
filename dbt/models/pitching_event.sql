@@ -12,16 +12,16 @@ SELECT
   games.date AS date,
   sequences.breakingBall AS breaking_ball,
   situations.title AS title,
-  situations.inning AS inning,
+  CAST(situations.inning AS INT) AS inning,
   situations.topOrBottom AS top_or_bottom,
-  sequences.strikes AS strikes,
-  sequences.balls AS balls,
-  situations.outCounts AS out_counts,
-  situations.runner AS runner,
-  situations.firstAttackTeamScore AS first_attack_team_score,
-  situations.secondAttackTeamScore AS second_attack_team_score,
+  CAST(sequences.strikes AS INT) AS strikes,
+  CAST(sequences.balls AS INT) AS balls,
+  CAST(situations.outCounts AS INT) AS out_counts,
+  CAST(situations.runner AS INT) AS runner,
+  CAST(situations.firstAttackTeamScore AS INT) AS first_attack_team_score,
+  CAST(situations.secondAttackTeamScore AS INT) AS second_attack_team_score,
   sequences.pitchResult AS pitch_result,
-  sequences.sequence AS sequence,
+  CAST(sequences.sequence AS INT) AS sequence,
   situations.batter AS batter,
   situations.bat AS bat,
   CASE
@@ -29,9 +29,9 @@ SELECT
       WHEN situations.topOrBottom = 'top' THEN games.firstAttackTeam
       ELSE ''
   END AS team_for_batter,
-  sequences.speed AS speed,
-  sequences.pitchXPosition AS pitch_x_position,
-  sequences.pitchYPosition AS pitch_y_position,
+  CAST(sequences.speed AS INT) AS speed,
+  CAST(sequences.pitchXPosition AS INT) AS pitch_x_position,
+  CAST(sequences.pitchYPosition AS INT) AS pitch_y_position,
   sequences.id AS id,
   sequences.updatedAt AS updated_at
  FROM default.raw_privategameforgameformat_jqdkca4vcbf6nh7ojsquhjo4ai_staging AS games
