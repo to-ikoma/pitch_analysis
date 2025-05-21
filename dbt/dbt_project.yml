@@ -32,6 +32,8 @@ models:
       +tags: ["mart"]
       +meta:
         layer: mart
+      +tblproperties:
+        layer: mart
 seeds:
   pitch_analysis:
     +tags: ["staging"]
