@@ -15,7 +15,7 @@ WITH base AS (
     'dbt/model' AS created_by,
     current_timestamp() AS updated_at,
     'dbt/model' AS updated_by
-  FROM {{ ref('pitching_event') }}
+  FROM {{ ref('raw_pitching_event') }}
   WHERE GROUP BY date
 )
 SELECT * FROM base 

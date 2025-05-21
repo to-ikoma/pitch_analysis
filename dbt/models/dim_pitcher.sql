@@ -12,13 +12,12 @@ WITH base AS (
     throw,
     top_or_bottom,
     second_attack_team,
-    first_attack_team,
     CASE
       WHEN top_or_bottom = 'top' THEN second_attack_team
       WHEN top_or_bottom = 'bottom' THEN first_attack_team
       ELSE ''
     END AS team_for_key
-  FROM {{ ref('pitching_event') }}
+  FROM {{ ref('raw_pitching_event') }}
 ),
 grouped AS (
   SELECT

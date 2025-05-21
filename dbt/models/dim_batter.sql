@@ -18,7 +18,7 @@ WITH base AS (
       WHEN top_or_bottom = 'bottom' THEN second_attack_team
       ELSE ''
     END AS team_for_key
-  FROM {{ ref('pitching_event') }}
+  FROM {{ ref('raw_pitching_event') }}
 ),
 grouped AS (
     SELECT

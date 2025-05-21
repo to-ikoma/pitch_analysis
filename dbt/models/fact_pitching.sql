@@ -24,7 +24,7 @@ WITH base AS (
     current_timestamp() AS created_at,
     'dbt/model' AS created_by
 
-    FROM {{ ref('pitching_event') }} pe
+    FROM {{ ref('raw_pitching_event') }} pe
     LEFT JOIN {{ ref('dim_pitcher') }} dp
     ON pe.owner = dp.owner AND pe.pitcher = dp.pitcher_name AND (pe.throw = dp.throw OR (pe.throw IS NULL AND dp.throw IS NULL)) AND pe.team_for_pitcher = dp.pitcher_team
     LEFT JOIN {{ ref('dim_batter') }} db
