@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_batter
+    columns:
+      - name: batter_key
+        tests:
+          - unique
+          - not_null
+  - name: dim_pitcher
+    columns:
+      - name: pitcher_key
+        tests:
+          - unique
+          - not_null
+  - name: dim_game_day
+    columns:
+      - name: game_day_key
+        tests:
+          - unique
+          - not_null
+  - name: fact_pitching
+    columns:
+      - name: pitching_id
+        tests:
+          - unique
+          - not_null
