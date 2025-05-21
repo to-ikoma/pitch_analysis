@@ -16,15 +16,16 @@ clean-targets: [target, dbt_packages]
 
 models:
   pitch_analysis:
+    staging:
+      +tags: ["staging"]
+      +meta:
+        layer: staging
+      +tblproperties:
+        layer: staging
     marts:
       +tags: ["mart"]
       +meta:
         layer: mart
-    +tags: ["staging"]
-    +meta:
-      layer: staging
-    +tblproperties:
-      layer: staging
 seeds:
   pitch_analysis:
     +tags: ["staging"]
