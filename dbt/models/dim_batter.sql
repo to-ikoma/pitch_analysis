@@ -28,7 +28,7 @@ grouped AS (
     owner,
     batter AS batter_name,
     bat,
-    team_for_key AS team,
+    team_for_key AS batter_team,
     'NO' AS is_missing,
     current_timestamp() AS created_at,
     'dbt/model' AS created_by,

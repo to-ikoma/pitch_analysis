@@ -1,4 +1,4 @@
-runner_key,runner_code,description,is_missing,created_at,created_by,updated_at,updated_by
+runner_key,runner_code,runner_description,is_missing,created_at,created_by,updated_at,updated_by
 1,0,なし,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
 2,1,一塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
 3,2,二塁,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds

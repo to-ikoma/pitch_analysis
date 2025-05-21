@@ -1,4 +1,4 @@
-pitching_type_key,pitching_type_name,pitching_type_id,english_name,is_missing,created_at,created_by,updated_at,updated_by
+pitching_type_key,pitching_type_name,pitching_type_id,pitching_type_english_name,is_missing,created_at,created_by,updated_at,updated_by
 1,ストレート,1,straight,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
 2,ツーシーム,2,twoseams,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
 3,スライダー,3,slider,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds

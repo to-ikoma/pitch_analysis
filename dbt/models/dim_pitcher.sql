@@ -27,7 +27,7 @@ grouped AS (
     owner,
     pitcher AS pitcher_name,
     throw,
-    team_for_key AS team,
+    team_for_key AS pitcher_team,
     'NO' AS is_missing,
     current_timestamp() AS created_at,
     'dbt/model' AS created_by,

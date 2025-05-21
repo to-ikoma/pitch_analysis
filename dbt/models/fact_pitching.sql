@@ -26,18 +26,18 @@ WITH base AS (
 
     FROM {{ ref('pitching_event') }} pe
     LEFT JOIN {{ ref('dim_pitcher') }} dp
-    ON pe.owner = dp.owner AND pe.pitcher = dp.pitcher_name AND (pe.throw = dp.throw OR (pe.throw IS NULL AND dp.throw IS NULL)) AND pe.team_for_pitcher = dp.team
+    ON pe.owner = dp.owner AND pe.pitcher = dp.pitcher_name AND (pe.throw = dp.throw OR (pe.throw IS NULL AND dp.throw IS NULL)) AND pe.team_for_pitcher = dp.pitcher_team
     LEFT JOIN {{ ref('dim_batter') }} db
-    ON pe.owner = db.owner AND pe.batter = db.batter_name AND pe.bat = db.bat AND pe.team_for_batter = db.team
+    ON pe.owner = db.owner AND pe.batter = db.batter_name AND pe.bat = db.bat AND pe.team_for_batter = db.batter_team
     LEFT JOIN (SELECT * FROM {{ ref('dim_owner') }} WHERE dbt_valid_to IS NULL) do
     ON pe.owner = do.owner_id
-    LEFT JOIN {{ ref('dim_pitching_types') }} dpt ON pe.breaking_ball = dpt.english_name
+    LEFT JOIN {{ ref('dim_pitching_types') }} dpt ON pe.breaking_ball = dpt.pitching_type_english_name
     LEFT JOIN {{ ref('dim_game_day') }} dgd ON pe.date = dgd.date
     LEFT JOIN {{ ref('dim_inning') }} di ON pe.inning = di.inning AND pe.top_or_bottom = di.top_bottom_english
     LEFT JOIN {{ ref('dim_pitching_counts') }} dpc ON pe.strikes = dpc.strikes AND pe.balls = dpc.balls
     LEFT JOIN {{ ref('dim_out_counts') }} doc ON pe.out_counts = doc.out_counts
     LEFT JOIN {{ ref('dim_runners') }} dr ON pe.runner = dr.runner_code
-    LEFT JOIN {{ ref('dim_pitching_results') }} dpr ON pe.pitch_result = dpr.english_name
+    LEFT JOIN {{ ref('dim_pitching_results') }} dpr ON pe.pitch_result = dpr.result_english_name
     LEFT JOIN {{ ref('dim_pitching_numbers') }} dpn ON pe.sequence = dpn.pitching_number
 )
 SELECT * FROM base

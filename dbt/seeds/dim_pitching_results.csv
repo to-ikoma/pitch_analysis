@@ -1,4 +1,4 @@
-pitching_result_key,pitching_result_name,pitching_result_id,english_name,is_missing,created_at,created_by,updated_at,updated_by
+pitching_result_key,pitching_result_name,pitching_result_id,result_english_name,is_missing,created_at,created_by,updated_at,updated_by
 1,ファール,1,foul,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
 2,四球,2,walk,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
 3,死球,3,deadBall,NO,2025-05-19T06:42:13.306725,dbt/seeds,2025-05-19T06:42:13.306725,dbt/seeds
