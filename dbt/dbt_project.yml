@@ -16,6 +16,12 @@ clean-targets: [target, dbt_packages]
 
 models:
   pitch_analysis:
+    raw:
+      +tags: ["raw"]
+      +meta:
+        layer: raw
+      +tblproperties:
+        layer: raw
     staging:
       +tags: ["staging"]
       +meta:
