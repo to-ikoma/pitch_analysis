@@ -11,7 +11,7 @@ from decimal import Decimal
 TABLE_NAMES = os.environ.get("TABLE_NAMES", "").split(",")
 GET_ALL_DATA_TABLE = os.environ.get("GET_ALL_DATA_TABLE")
 S3_BUCKET = os.environ.get("S3_BUCKET")
-DATABRICKS_JOB_ID = int(os.environ.get("DATABRICKS_JOB_ID"))
+DATABRICKS_JOB_ID_LOAD_TO_RAW = int(os.environ.get("DATABRICKS_JOB_ID_LOAD_TO_RAW"))
 DATABRICKS_CONN_ID = os.environ.get("DATABRICKS_CONN_ID")
 
 
@@ -22,7 +22,7 @@ def decimal_default(obj):
 
 
 @dag(tags=['dynamodb', 's3', 'deltalake'])
-def export_all_data_of_source_dynamodb_to_load_to_raw():
+def load_to_raw_pitching_data_flow():
 
     @task
     def fetch_and_upload(table_name: str):
@@ -82,7 +82,7 @@ def export_all_data_of_source_dynamodb_to_load_to_raw():
         db_task = DatabricksRunNowOperator(
             task_id=f"load_{table_name}_to_delta",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            job_id=DATABRICKS_JOB_ID,
+            job_id=DATABRICKS_JOB_ID_LOAD_TO_RAW,
             python_params=[table_name, s3_path]
         )
  
@@ -90,4 +90,4 @@ def export_all_data_of_source_dynamodb_to_load_to_raw():
        
 
 
-dag = export_all_data_of_source_dynamodb_to_load_to_raw()
+dag = load_to_raw_pitching_data_flow()
